@@ -1,0 +1,35 @@
+<html>
+    <style type="text/css" media="screen">
+        .leftcol {
+            width: 15%;
+            height: 95%;
+        }
+        .rightcol {
+            width: 80%;
+            height: 95%;
+        }
+    </style>
+
+    <head>
+        <title>Daniel From Oakland</title>
+    </head>
+
+    <script>
+	    window.addEventListener("message", function(event) {
+    		var iframe = document.getElementById("content");
+	    	iframe.src = event.data;
+	    	iframe.contentWindow.location.reload();
+		});
+    </script>
+
+    <body>
+    	<marquee behavior="alternate">
+    		<font face="Comic Sans MS">
+    			PLEASE USE LINKS TO NAVIGATE. PLEASE DO NOT REFRESH THE PAGE. :)
+    		</font>
+    	</marquee>
+    	<iframe class="leftcol" src="links.html" frameBorder="0" id="links"></iframe>
+        <iframe class="rightcol" src="home.html" frameBorder="0" id="content"></iframe>
+    </body>
+</html>
+
