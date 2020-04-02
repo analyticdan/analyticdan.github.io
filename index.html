@@ -18,7 +18,6 @@
 	    window.addEventListener("message", function(event) {
     		var iframe = document.getElementById("content");
 	    	iframe.src = event.data;
-	    	iframe.contentWindow.location.reload();
 		});
     </script>
 
