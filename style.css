@@ -1,0 +1,30 @@
+.navigation {
+  border: 1px black solid;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.header {
+  text-align: center;
+}
+
+.image {
+  text-align: center;
+}
+
+.read-more {
+  border: 1px black solid;
+}
+
+.read-more__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.read-more__body {
+  border-top: 1px black solid;
+  display: none;
+  padding: 5px;
+}

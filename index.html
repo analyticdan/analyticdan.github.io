@@ -1,34 +1,289 @@
-<html>
-    <style type="text/css" media="screen">
-        .leftcol {
-            width: 15%;
-            height: 95%;
-        }
-        .rightcol {
-            width: 80%;
-            height: 95%;
-        }
-    </style>
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <title>Daniel From Oakland</title>
-    </head>
+<head>
+  <title>AnalyticDan's GitHub Page - Home</title>
+  <link rel="stylesheet" href="style.css">
+  </link>
+  <script src="index.js"></script>
+</head>
 
-    <script>
-	    window.addEventListener("message", function(event) {
-    		var iframe = document.getElementById("content");
-	    	iframe.src = event.data;
-		});
-    </script>
+<body>
+  <div class="navigation">
+    <a href="index.html">Home</a>
+    <a href="dog.html">Dog</a>
+    <a href="dungeon.html">Dungeon Game</a>
+    <a href="river.pdf">River Crossing</a>
+  </div>
+  <h1 class="header">Welcome to Dan's GithHub Page!</h1>
+  <p>
+    My name is Daniel and this is my website on GitHub.
+    In case you don't know who I am or what I look like,
+    this is a picture of me dressed up in my Sunday's best
+    from 2016 on the night of my senior prom:
+  </p>
+  <div class="image">
+    <img alt="me" src="imgs/me.jpg" />
+  </div>
+  <h1>About Me:</h1>
+  <h2>Education:</h2>
+  <p>
+    After graduating from Oakland Technical High School in 2016, I went to
+    the University of California, Berkeley, where I graduated with a B.A.
+    in computer science from the College of Letters and Sciences in 2020
+    with a 3.69 GPA.
+  </p>
 
-    <body>
-    	<marquee behavior="alternate">
-    		<font face="Comic Sans MS">
-    			PLEASE USE THE LINKS IN THE SIDEBAR TO NAVIGATE. DO NOT REFRESH THE PAGE. :)
-    		</font>
-    	</marquee>
-    	<iframe class="leftcol" src="links.html" frameBorder="0" id="links"></iframe>
-        <iframe class="rightcol" src="home.html" frameBorder="0" id="content"></iframe>
-    </body>
+  <p>
+    In the pursuit of my computer science degree, I focused on taking as
+    many systems classes as I could (the 160s series), which included
+    classes on:
+  <ul>
+    <li>
+      operating systems, where I learned about the basics of
+      operating systems: the division of user space and kernel space,
+      system calls, interrupts, synchronization and locking/mutexes,
+      scheduling, virtual memory, file systems, and the challenges of
+      distributed systems. In this class, we had a semester-long
+      project to enhance a barebones operating system called PintOS
+      with the ability to run user programs with arguments,
+      priority schedule and execute multiple user threads, and
+      perform buffered reads and writes to a Unix FFS file system,
+      which was done in teams of four.
+    </li>
+    <li>
+      compilers and programming languages, where I learned the
+      computer science theoretical underpinnings of lexing, parsing,
+      semantically analyzing, and generating and optimizing code for
+      compilation of high level programming languages to assembly.
+      In particular, I learned about finite state machines and
+      various grammars to classify programming languages and the
+      algorithmic tools to lex and parse them. I also learned about
+      scoping for type checking and semantic analysis, flow diagrams
+      for optimizing code blocks, stack and register machines for
+      generating and executing code, and garbage collection. In this
+      class, We had a semester long project to write a lexer, parser,
+      semantic analyser, and (optimized) RISC-V code generator for a
+      typed variant of Python 2.5 called ChocoPy. The project was
+      meant for groups of two, but in my enthusiasm, I mostly
+      completed the projects on my own.
+    </li>
+    <li>
+      networking, where I learned about how routing is done, both on
+      the Internet and on intranets, about TCP, and about DNS.
+    </li>
+    <li>
+      computer security, where I learned basic cyber-exploits, such
+      as buffer overflow attacks, SQL injections, CSRF, and XSS. Our
+      projects in this class were to implement a number of these
+      attacks on a provided, insecure server or VM and to create a
+      program that implemented a file sharing functionality while
+      minimizing the number of attacks that the service was
+      susceptible to.
+    </li>
+  </ul>
+  </p>
+  <p>
+    Although not officially part of my degree, I also studied math up to
+    linear and abstract algebra and real analysis at the undergraduate
+    level, and economics, taking classes in introductory macroeconomics,
+    intermediate microeconomics, and a class on auctions and game theory.
+  </p>
+  <p>
+    I also have interests in biology, though not at the collegiate level,
+    having taken AP Biology and AP Chemistry in high school receiving 5s
+    (out of 5) in both, particularly metabolic and evolutionary biology.
+  </p>
+  <div class="read-more">
+    <div class="read-more__header" onclick="onClickReadMore('pathogen');">
+      <span class="read-more__header-text" id="read-more__header-text--pathogen">
+        Read More
+      </span>
+      <span class="read-more__header-indicator" id="read-more__header-indicator--pathogen">
+        +
+      </span>
+    </div>
+    <div class="read-more__body" id="read-more__body--pathogen">
+      <p>
+        I've tried every diet under the sun: calorie counting (IIFYM),
+        intermittent fasting, prolonged fasting, low carb/keto, high carb,
+        high protein, vegetarian, paleo, and have tried to understand the
+        metabolic underpinnings of the obesity epidemic. Having tried and
+        failed at these diets, I believe in a somewhat unorthodox theory that
+        the two major contemporary illnesses of our time, depression and
+        obesity, are linked in that both are caused by an excessive pathogenic
+        load.
+      </p>
+      <p>
+        The first clue for me is a teleological explanation of depression
+        (and obesity), which is that acute depression is an evolutionary
+        adaptation meant to conserve energy for repair after a bodily injury.
+        Many of the symptoms of depression, e.g. lethargy, hypersomnia, and
+        avoidance of people, are adaptive when it comes to preventing the
+        spread of disease. The inflammation that occurs in people with
+        depression is also symptomatic of an immune response. Heat denatures
+        proteins that bacteria rely on to metabolize energy substrates and/or
+        reproduce. Though fever can be fatal for humans in some cases, the
+        body has an efficient respiratory system to minimize self-cell damage
+        that foreign microbes cannot paracetize so well. Though some believe
+        inflammation causes illness, I believe that inflammation is a sign
+        that the body is already ill. That is to say, I believe the arrow of
+        causality is reversed from the popular science point of view.
+      </p>
+      <p>
+        Once this acute inflammation turns chronic, however, the body
+        requires more energy to maintain this high body temperature. Fat
+        accumulates around the midsection as an attempt to insulate the core.
+        Hunger hormones go into overdrive. Whether the person craves sugar to
+        make use of its readily metabolized glucose monomers, fat for its
+        high energy density, or protein for its high thermic effect, the
+        result of chronic inflammation is high energy demand to complete the
+        immune process, along the way causing obesity and other problems for
+        organs like the liver in the case of non-alcoholic fatty liver
+        disease or certain forms of pancreatitis and heart disease by storing
+        fat and shuttling energy for use elsewhere.
+      </p>
+      <p>
+        My belief is the issue is best remedied by a form of acute heat
+        therapy, which mimics fever to denature the pathogens proteins,
+        thereby killing them and rendering them unable to reproduce once the
+        body's internal temperature is sustained around 101 degrees
+        Fahrenheit. Ensuring that one is clothed in properly insulating
+        attire when not in heat therapy is also recommended from my point of
+        view. Aside from that, I would recommend boiling water before
+        consumption to decrease pathogenic load as much as possible. At a
+        time when aging pipe infrastructure diminishes tap water quality in
+        the developed world, the public is more unconscious of the role of
+        water-borne illnesses than ever. Cholera, typhoid, and TB are may
+        seem like quaint, old world diseases, but their descendants are not.
+        If the statistics are right, we are getting less of our water intake
+        from boiled coffees and teas and more of our water intake from
+        dubiously filtered tap water in reusable bottle form. The plagues of
+        old have come back, but hide themselves with new disguises, I claim.
+      </p>
+      <p>
+        Regarding the effects of reducing obesity via heat therapy, I only
+        have anecdotal evidence from my own experience, but on the effects of
+        heat therapy on depression, there is a study from UW Madison showing
+        that when patients were subject to infrared lights that brought their
+        core temperature up to 38.5 degrees C, or 101.3 degrees F, their
+        depression went away for up to six weeks post-treatment. I can
+        personally attest to heat therapy for the treatment of depression,
+        too.
+      </p>
+      <p>
+        As to why depression and obesity have been rising in recent years,
+        I would attribute at least some of the cause, ironically enough, to
+        climate change, though there are probably a myriad of reasons. While
+        fever temperatures are enough to kill pathogens, slight increases in
+        temperature have dramatic effects on the rate of reaction, such as
+        those that keep bacteria alive and help them to proliferate. As
+        homeotherms, we don't notice the effects of slight temperature
+        changes so much, given that we regulate temperature in large part
+        internally, but for life forms that cannot regulate body temperature
+        in this way, any slight increase in temperature can influence their
+        survivability dramatically. If their reproduction is exponential,
+        this would mean the proliferation of bacterial and viral life
+        heretofore unseen in the modern world.
+      </p>
+    </div>
+  </div>
+  <p>
+    I also have interests in literature and philosophy. With regard to the
+    ancients, I read Sophocles' "Oedipus Rex" and "Antigone," Plato's
+    "Republic" and "The Death of Socrates" in high school and I read
+    Aristotle's "Nicomachean Ethics" in college. In terms of the moderns,
+    I've dead Descartes, Hobbes, and Rousseau in college and dabbled in some
+    Neitzche on my own time. I've enjoyed the Russian authors Dostoyevsky,
+    Lermontov, and Tolstoy, which I read on my own time. As for contemporary
+    literature, I enjoyed “White Tiger” by Aravind Adiga when I read it in
+    2012.
+  </p>
+  <h2>Professional:</h2>
+  <p>
+    Most recently, I've worked as a Software Developer for two years
+    (2021-2023), working in React/JS and Java. Aside from JavaScript/JSX and
+    Java, I'm also comfortable in Python. I have also worked with Go/Golang
+    and C in the past, building school projects at university, but may be
+    rustier in those languages.
+  </p>
+  <p>
+    I've also worked odd jobs, namely as a warehouse worker in an Amazon in
+    2020-2021 warehouse and as an IT support tech in 2016.
+  </p>
+  <p>
+    A resume may be made available on request by emailing my GitHub username
+    '@' gmail.com (a*******d**@gmail.com).
+  </p>
+  <h2>Personal:</h2>
+  <h3>Music:</h3>
+  <p>
+    I have a deep appreciation of music, particularly 4th to 2nd generation
+    K-pop groups. I grew up to my cousin, her friends, and my peers on the
+    internet listening to K-pop and watching Korean dramas in the heyday of
+    the 2nd generation of Girl's Generation, 2NE1, and Taeyang, but my
+    interest in K-pop started in 2021, when I first heard STAYC's single
+    "ASAP" on recommendation from the YouTube algorithm. Since then, I've
+    branched out into other 4th Generation groups, such as ENHYPHEN, IVE,
+    (G)-IDLE, and NewJeans and gone back to listen to 3rd generation idol
+    groups such as Blackpink, TWICE, and Red Velvet.
+  </p>
+  <p>
+    I grew up listening to EDM/hardstyle and dubstep. My favorite hardstyle
+    tracks were Angerfist's "No ******* Soul" and "Bite Your Style," Thah
+    Playah's "Walking the Line," and Nitrogenetics' "Inside Your Head." I
+    also enjoyed listening to hardstyle mixes produced by "WhynayEmnayRS"
+    from his six-part series entitled "Slayertraxx," available on his YouTube
+    channel.
+  </p>
+  <p>
+    I also listen to rap music from time to time: Eminem, A$AP Rocky, A$AP
+    Ferg, ScHoolboy Q, Kendrick Lamar, Joey Bad*** to name a few.
+  </p>
+  <p>
+    I also occasionally listen to classical music while I work, particularly
+    Erik Satie's "Gymnopedie No.1" and Chopin's "Nocturne Op.9 No.2," but I
+    have been enjoying Giuseppe Tartini's "Violin Sonata in G minor," also
+    known as the "Devil's Trill Sonata" and Beethoven's "Moonlight Sonata."
+  </p>
+  <p>
+    In general, I would say I like a variety of forms of music, as there are
+    many other musical artists which I also listen to, depending on my mood.
+  </p>
+</body>
+<h3>Christianity:</h3>
+<p>
+  I am a Roman Catholic, having grown up in the Roman Catholic tradition and
+  been baptized at the now defunct St. Mary's Church and confirmed at St.
+  Anthony's Church, both in Oakland, California. I became an atheist or an
+  agnostic in middle school and high school, then became interested in
+  religions of all sorts, primarily Eastern Mysticism and ancient myths like
+  those written about in Joseph Campbell's “Hero With a Thousand Faces,”
+  in college.
+</p>
+<p>
+  My conversion to Christianity began late in my college career, when I kept
+  hearing about Peter Thiel's Christianity. I read and listened to his works
+  voraciously. To this day, I still read and re-read his essays “The
+  Straussian Moment” and the “The Optimistic Thought Experiment” and listen
+  to his interviews, particularly his interview with Eric Weinstein, which
+  help form the basis of my belief in Christ.
+</p>
+<p>
+  The pace of my conversion sped up when I began mimicking Peter Thiel's
+  adoration for his mentor, the late French Christian and anthropologist
+  Rene Girard. As I read the Girard Reader for the first time, I had a Saul
+  on the Road to Damascus moment where I felt as though Girard's explanation
+  of Christianity and the mimetic and scapegoating processes were so obvious,
+  yet hidden. I sat down to write various essays, trying to refute the
+  Christian message, but I always found logical inconsistencies in my
+  argument and felt compelled to admit that the anti-sacrificial message of
+  Christianity was the “narrow … road that leads to life” (Matthew 7:14).
+</p>
+<p>
+  Today, I am a Roman Catholic by tradition, but my belief in Christianity is
+  largely thanks to the work of Peter Thiel and Rene Girard.
+</p>
+</body>
+
 </html>
-
