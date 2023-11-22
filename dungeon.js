@@ -213,7 +213,7 @@ canvas.addEventListener("keydown", (e) => {
   for (const child of playersNode.children) {
     if (child.row == nextRow && child.col == nextCol) {
       if (child.requiresKey && !playerKeys.includes(child.requiresKey)) {
-        console.log("You do not have the required key:", child.requiresKey);
+        alert("You do not have the required key:", child.requiresKey);
       } else {
         if (child.state == SEEN) {
           child.state = VISITED;
