@@ -3,7 +3,7 @@
 
 <head>
   <title>AnalyticDan's GitHub Page - Dungeon Game</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/dungeon.css">
   </link>
 </head>
 
@@ -19,7 +19,21 @@
     Click on the canvas below and use arrow keys or WASD to move about the
     dungeon.
   </div>
-  <canvas id="canvas" height="450" width="450" tabindex="1"></canvas>
+  <div class="game">
+    <canvas id="canvas" class="game__canvas" height="450" width="450" tabindex="1"></canvas>
+    <div class="game__controls">
+      <div id="keys" class="game__controls--keys">Keys: None</div>
+      <div id="text" class="game__controls--text"></div>
+      <div class="game__controls--arrows">
+        <button onclick="moveUp()">↑</button>
+      </div>
+      <div class="game__controls--arrows">
+        <button onclick="moveLeft()">←</button>
+        <button onclick="moveDown()">↓</button>
+        <button onclick="moveRight()">→</button>
+      </div>
+    </div>
+  </div>
   <script src="dungeon.js"></script>
 </body>
 

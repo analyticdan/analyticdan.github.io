@@ -1,0 +1,35 @@
+@import url("common.css");
+
+.game {
+  display: flex;
+  margin: 10px;
+  max-height: 450px;
+}
+
+.game__canvas {
+  border: 1px black solid;
+  margin-right: 20px;
+}
+
+.game__controls {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.game__controls--keys {
+  word-break: break-word;
+  margin-bottom: 10px;
+}
+
+.game__controls--text {
+  overflow-y: scroll;
+  word-break: break-word;
+  margin-bottom: 20px;
+  height: 100%
+}
+
+.game__controls--arrows {
+  display: flex;
+  justify-content: center;
+}
