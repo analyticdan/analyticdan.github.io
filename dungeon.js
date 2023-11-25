@@ -5,7 +5,8 @@ const DEBUG = 0;
 
 const DUNGEON_HEIGHT = 10;
 const DUNGEON_WIDTH = 10;
-const CRITICAL_PATH_LENGTH = 80;
+const CRITICAL_PATH_LENGTH = 25;
+const NUM_BONUS_KEYS = 5;
 
 const UNSEEN = 0;
 const SEEN = 1;
@@ -16,6 +17,9 @@ const LEFT = [0, -1];
 const DOWN = [1, 0];
 const RIGHT = [0, 1];
 const DIRECTIONS = [UP, LEFT, DOWN, RIGHT];
+
+const ROOMS = [];
+var KEY_COUNTER = 0;
 
 function isValidTile(row, col) {
   return row >= 0 && row < DUNGEON_HEIGHT && col >= 0 && col < DUNGEON_WIDTH;
@@ -33,83 +37,129 @@ function getAdjacentTiles(currentRoom, predicate) {
   return adjacentTiles;
 }
 
-function createRoom(id, state, row, col, parent, lock) {
-  return {
+function createRoom(id, state, row, col, parent) {
+  const room = {
     id: id,
     state: state,
     row: row,
     col: col,
     parent: parent,
     children: [],
-    lock: lock,
-    key: 0,
   };
+  if (parent) {
+    parent.children.push(room);
+  }
+  ROOMS.push(room);
+  return room;
+}
+
+function createKeyAndLock(keyRoom, lockRoom) {
+  if (keyRoom.id >= lockRoom.id) {
+    console.log("Keys cannot be placed after lock.");
+    return;
+  } else if (keyRoom.key) {
+    console.log("Room " + keyRoom.id + " already has a key.");
+    return;
+  } else if (lockRoom.lock) {
+    console.log("Room " + lockRoom.id + " already has a lock.");
+    return;
+  }
+  KEY_COUNTER += 1;
+  keyRoom.key = KEY_COUNTER;
+  lockRoom.lock = KEY_COUNTER;
+}
+
+function generateRoom(grid, parentRoom, backtrack) {
+  var keyRoom = null;
+
+  var validAdjacentTiles = getAdjacentTiles(
+    parentRoom,
+    (row, col) => !grid[row][col]
+  );
+  if (validAdjacentTiles.length == 0) {
+    if (!backtrack) {
+      return null;
+    }
+    keyRoom = parentRoom;
+    while (validAdjacentTiles.length == 0) {
+      parentRoom = parentRoom.parent;
+      validAdjacentTiles = getAdjacentTiles(
+        parentRoom,
+        (row, col) => !grid[row][col]
+      );
+    }
+  }
+  /* Add extra weight to going the same direction as parent to make the dungeon more linear. */
+  if (parentRoom.parent != null) {
+    const linearDirectionRow = 2 * parentRoom.row - parentRoom.parent.row;
+    const linearDirectionCol = 2 * parentRoom.col - parentRoom.parent.col;
+    if (
+      isValidTile(linearDirectionRow, linearDirectionCol) &&
+      !grid[linearDirectionRow][linearDirectionCol]
+    ) {
+      validAdjacentTiles.push([linearDirectionRow, linearDirectionCol]);
+    }
+  }
+
+  const r = Math.floor(Math.random() * validAdjacentTiles.length);
+  const childTile = validAdjacentTiles[r];
+  const childRoom = createRoom(
+    ROOMS.length,
+    parentRoom == ROOMS[0] ? SEEN : UNSEEN,
+    childTile[0],
+    childTile[1],
+    parentRoom
+  );
+  if (keyRoom) {
+    createKeyAndLock(keyRoom, childRoom);
+  }
+  grid[childRoom.row][childRoom.col] = true;
+  return childRoom;
 }
 
 function generateDungeon() {
-  var keyCounter = 0;
   const startRoom = createRoom(
-    0,
+    ROOMS.length,
     VISITED,
     Math.floor(Math.random() * DUNGEON_HEIGHT),
     Math.floor(Math.random() * DUNGEON_WIDTH),
-    null,
-    0
+    null
   );
   const grid = Array(DUNGEON_HEIGHT)
     .fill(false)
     .map(() => Array(DUNGEON_WIDTH));
   grid[startRoom.row][startRoom.col] = true;
 
+  /* Generate critical path. */
   var currentRoom = startRoom;
   for (var i = 1; i < CRITICAL_PATH_LENGTH; i++) {
-    var lock = 0;
-    var nextTiles = getAdjacentTiles(
-      currentRoom,
-      (row, col) => !grid[row][col]
-    );
-
-    /* If we reach a dead end on the critical path, drop a key and backtrack. */
-    if (nextTiles.length == 0) {
-      keyCounter += 1;
-      currentRoom.key = keyCounter;
-      lock = keyCounter;
-    }
-    while (nextTiles.length == 0) {
-      currentRoom = currentRoom.parent;
-      nextTiles = getAdjacentTiles(currentRoom, (row, col) => !grid[row][col]);
-    }
-
-    /* Add extra weight to going the same direction as parent to make the dungeon more linear. */
-    if (currentRoom.parent != null) {
-      const linearDirectionRow =
-        currentRoom.row + (currentRoom.row - currentRoom.parent.row);
-      const linearDirectionCol =
-        currentRoom.col + (currentRoom.col - currentRoom.parent.col);
-      if (
-        isValidTile(linearDirectionRow, linearDirectionCol) &&
-        !grid[linearDirectionRow][linearDirectionCol]
-      ) {
-        nextTiles.push([linearDirectionRow, linearDirectionCol]);
-      }
-    }
-
-    const r = Math.floor(Math.random() * nextTiles.length);
-    const nextTile = nextTiles[r];
-    const nextRoom = createRoom(
-      i,
-      currentRoom == startRoom ? SEEN : UNSEEN,
-      nextTile[0],
-      nextTile[1],
-      currentRoom,
-      lock
-    );
-    grid[nextRoom.row][nextRoom.col] = true;
-    currentRoom.children.push(nextRoom);
-    currentRoom = nextRoom;
+    currentRoom = generateRoom(grid, currentRoom, true);
   }
-  // to do: generate bonus paths
-  // to do: add extra keys using topological sort (earlier rooms get keys, later rooms get locks)
+  /* Fill out dungeon with bonus paths branching off the critical path. */
+  const stack = [...ROOMS.slice(0, -1)].reverse();
+  while (stack.length != 0) {
+    currentRoom = stack.pop();
+    if (currentRoom) {
+      stack.push(generateRoom(grid, currentRoom, false));
+    }
+  }
+  for (var i = 0; i < NUM_BONUS_KEYS; i++) {
+    var keyR;
+    var keyRoom;
+    var lockR;
+    var lockRoom;
+    do {
+      keyR = Math.floor(Math.random() * (CRITICAL_PATH_LENGTH - 1));
+      keyRoom = ROOMS[keyR];
+    } while (keyRoom.key);
+    do {
+      lockR =
+        CRITICAL_PATH_LENGTH +
+        Math.floor(Math.random() * (ROOMS.length - CRITICAL_PATH_LENGTH));
+      lockRoom = ROOMS[lockR];
+    } while (lockRoom.lock);
+    createKeyAndLock(keyRoom, lockRoom);
+  }
   return startRoom;
 }
 
