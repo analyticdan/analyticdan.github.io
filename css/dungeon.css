@@ -6,6 +6,10 @@
   max-height: 450px;
 }
 
+.instructions {
+  margin-top: 10px;
+}
+
 .game__canvas {
   border: 1px black solid;
   margin-right: 20px;
@@ -26,7 +30,7 @@
   overflow-y: scroll;
   word-break: break-word;
   margin-bottom: 20px;
-  height: 100%
+  height: 100%;
 }
 
 .game__controls--arrows {
