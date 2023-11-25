@@ -149,7 +149,7 @@ function generateDungeon() {
     var lockR;
     var lockRoom;
     do {
-      keyR = Math.floor(Math.random() * (CRITICAL_PATH_LENGTH - 1));
+      keyR = 1 + Math.floor(Math.random() * (CRITICAL_PATH_LENGTH - 2));
       keyRoom = ROOMS[keyR];
     } while (keyRoom.key);
     do {
